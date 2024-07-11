@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { materias } from "../materias";
 
-export default function DatosBase() {
+export default function DatosBase({ checkbox, setCheckbox }: { readonly checkbox: boolean, readonly setCheckbox: Dispatch<SetStateAction<boolean>>}) {
   const [promedio, setPromedio] = useState(0);
-  const [checkbox, setCheckbox] = useState(true);
   const [progreso, setProgreso] = useState(0);
   const pProgressRef = useRef<HTMLDivElement>(null);
 

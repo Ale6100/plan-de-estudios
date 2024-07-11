@@ -1,4 +1,4 @@
-interface IMateria {
+export interface IMateria {
   id: number;
   nombre: string;
   horasSemanales?: number;
