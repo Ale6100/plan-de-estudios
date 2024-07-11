@@ -7,8 +7,8 @@ export default function Grid({ checkbox }: { readonly checkbox: boolean }) {
   const [ animationParent ] = useAutoAnimate()
 
   useEffect(() => {
-    const materiasConNota = checkbox ? materias : materias.filter(materia => materia.id >= 2);
-    setMateriasLista(materiasConNota)
+    const listaMaterias = checkbox ? materias : materias.filter(materia => materia.id >= 2);
+    setMateriasLista(listaMaterias)
   }, [checkbox]);
 
   const bgColors = (materia: IMateria) => {

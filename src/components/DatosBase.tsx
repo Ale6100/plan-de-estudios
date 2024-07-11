@@ -7,14 +7,15 @@ export default function DatosBase({ checkbox, setCheckbox }: { readonly checkbox
   const pProgressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const materiasConNota = checkbox ? materias.filter(materia => materia.nota != null) : materias.filter(materia => materia.nota != null && materia.id >= 2);
+    const listaMaterias = checkbox ? materias : materias.filter(materia => materia.id >= 2);
+    const listaMateriasAprobadas = listaMaterias.filter(materia => materia.nota != null);
 
-    const promedio = materiasConNota.reduce((acc, materia) => acc + (materia.nota ?? 0), 0) / materiasConNota.length;
+    const promedio = listaMateriasAprobadas.reduce((acc, materia) => acc + (materia.nota ?? 0), 0) / listaMateriasAprobadas.length;
     setPromedio(promedio);
 
     const pProgres = pProgressRef.current;
     if (pProgres) {
-      const progreso = (materiasConNota.length / materias.length) * 100;
+      const progreso = (listaMateriasAprobadas.length / listaMaterias.length) * 100;
       pProgres.style.width = `${progreso}%`;
       setProgreso(progreso);
     }
