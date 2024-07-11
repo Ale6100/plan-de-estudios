@@ -1,10 +1,14 @@
 export interface IMateria {
   id: number;
   nombre: string;
-  horasSemanales?: number;
+  horasSemanales: number;
   conectadoCon: number[]; //! Por ahora no le doy uso. id de materias conectadas. Sólo cuenta si la flecha sale de la materia actual (para que no se dupliquen las conexiones)
   nota?: number;
   cursando?: boolean;
+  enlaces?: {
+    text: string,
+    url: string
+  }[];
 }
 
 export const materias: IMateria[] = [
@@ -12,36 +16,42 @@ export const materias: IMateria[] = [
     id: -4,
     nombre: 'Introducción al Pensamiento Científico',
     conectadoCon: [],
+    horasSemanales: 4,
     nota: 10
   },
   {
     id: -3,
     nombre: 'Introducción al Conocimiento de la Sociedad y el Estado',
     conectadoCon: [],
+    horasSemanales: 4,
     nota: 9
   },
   {
     id: -2,
     nombre: 'Análisis Matemático A',
     conectadoCon: [],
+    horasSemanales: 9,
     nota: 5
   },
   {
     id: -1,
     nombre: 'Física',
     conectadoCon: [],
+    horasSemanales: 6,
     nota: 9
   },
   {
     id: 0,
     nombre: 'Química',
     conectadoCon: [],
+    horasSemanales: 6,
     nota: 10
   },
   {
     id: 1,
     nombre: 'Álgebra',
     conectadoCon: [],
+    horasSemanales: 9,
     nota: 8
   },
   {
@@ -49,14 +59,30 @@ export const materias: IMateria[] = [
     nombre: 'Introducción a la Programación',
     horasSemanales: 10,
     conectadoCon: [4],
-    nota: 9
+    nota: 9,
+    enlaces: [
+      {
+        text: 'Programa',
+        url: 'programas/introduccion_a_la_programacion.pdf'
+      },
+      {
+        text: 'Material',
+        url: 'https://github.com/Ale6100/introduccion-a-la-programacion.git'
+      }
+    ]
   },
   {
     id: 3,
     nombre: 'Álgebra I',
     horasSemanales: 10,
     conectadoCon: [4],
-    nota: 8
+    nota: 8,
+    enlaces: [
+      {
+        text: 'Programa',
+        url: 'programas/algebra_1.txt'
+      },
+    ]
   },
   {
     id: 4,

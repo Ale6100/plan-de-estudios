@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { IMateria, materias, puntosDeCorte } from "../materias";
+import { IMateria, materias, puntosDeCorte } from "../utils/materias";
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 export default function Grid({ checkbox }: { readonly checkbox: boolean }) {
@@ -32,21 +32,33 @@ export default function Grid({ checkbox }: { readonly checkbox: boolean }) {
               {puntosDeCorte.find(e => e.id === materia.id)?.texto}
             </div>
           )}
-          <div className={`${materia.horasSemanales && 'flip-card'} h-40`}> {/* El código para el flip-card lo saqué parcialmente de internet */}
+          <div className='flip-card h-40'> {/* El código para el flip-card lo saqué parcialmente de internet */}
             <div className='flip-card-inner'>
               <div className={`flip-card-front flex flex-col justify-center items-center py-4 px-3 gap-3 rounded-lg ${bgColors(materia)}`}>
                 <p className="font-semibold text-lg">{materia.nombre}</p>
                 {materia.nota && <p className="text-sm">Nota Final: {materia.nota}</p>}
               </div>
               <div className={`flip-card-back flex flex-col justify-center items-center py-4 px-3 gap-3 rounded-lg ${bgColors(materia)}`}>
-                {materia.horasSemanales && (
+                <div className="flex flex-col justify-center items-center gap-3">
                   <div className="flex justify-center items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <p>{materia.horasSemanales} hrs/sem</p>
                   </div>
-                )}
+                  {
+                  materia.enlaces &&
+                  <ul>
+                    {
+                      materia.enlaces.map(info => (
+                        <li key={info.text}>
+                          <a href={info.url} className="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">{info.text}</a>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                  }
+                </div>
               </div>
             </div>
           </div>
