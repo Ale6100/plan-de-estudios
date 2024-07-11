@@ -3,7 +3,6 @@ interface IMateria {
   nombre: string;
   horasSemanales?: number;
   conectadoCon: number[]; //! Por ahora no le doy uso. id de materias conectadas. Sólo cuenta si la flecha sale de la materia actual (para que no se dupliquen las conexiones)
-  colSpan?: `col-span-${number}`;
   nota?: number;
   cursando?: boolean;
 }
@@ -174,7 +173,6 @@ export const materias: IMateria[] = [
     nombre: 'Trabajo Final - Tesis de Licenciatura',
     horasSemanales: 15,
     conectadoCon: [],
-    colSpan: 'col-span-2'
   }
 ]
 

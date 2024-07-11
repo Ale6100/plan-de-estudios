@@ -1,69 +1,62 @@
 import { useEffect, useRef, useState } from "react";
-import Grid from "./components/Grid";
 import { materias } from "./materias";
+import Grid from "./components/Grid";
 
 export default function App() {
-  const [ promedio, setPromedio ] = useState(0);
-  const [ checkbox, setCheckbox ] = useState(true);
-  const [ progreso, setProgreso ] = useState(0);
-  const pProgressRef = useRef<HTMLParagraphElement>(null);
+  const [promedio, setPromedio] = useState(0);
+  const [checkbox, setCheckbox] = useState(true);
+  const [progreso, setProgreso] = useState(0);
+  const pProgressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let materiasConNota = [];
-
-    if (checkbox) {
-      materiasConNota = materias.filter(materia => materia.nota != null);
-
-    } else {
-      materiasConNota = materias.filter(materia => materia.nota != null && materia.id >= 2);
-    }
+    const materiasConNota = checkbox ? materias.filter(materia => materia.nota != null) : materias.filter(materia => materia.nota != null && materia.id >= 2);
 
     const promedio = materiasConNota.reduce((acc, materia) => acc + (materia.nota ?? 0), 0) / materiasConNota.length;
     setPromedio(promedio);
 
     const pProgres = pProgressRef.current;
     if (pProgres) {
-      const progreso = materiasConNota.length / materias.length * 100;
+      const progreso = (materiasConNota.length / materias.length) * 100;
       pProgres.style.width = `${progreso}%`;
       setProgreso(progreso);
     }
   }, [checkbox]);
 
-  const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCheckbox(e.target.checked);
-  }
+  const handleCheckbox = () => {
+    setCheckbox(!checkbox);
+  };
 
   return (
-    <section className="bg-slate-100 p-2">
-      <p className="fixed top-[1vw] left-[1vw] text-red-600 font-bold">Página no terminada</p>
+    <div className="bg-gray-900 text-gray-200 p-8 mx-auto min-h-screen">
+      <h1 className="text-3xl max-md:text-xl font-bold mb-6 text-center text-white">Plan de Estudios - Licenciatura en Ciencias de la Computación</h1>
 
-      <h1 className="text-center text-xl">Mi plan de estudios de la Licenciatura en Ciencias de la Computación</h1>
+      <p className="mb-6">Mi nombre es{" "}<a className="text-blue-400 hover:underline" href="https://www.linkedin.com/in/alejandro-portaluppi/" target="_blank" rel="noopener noreferrer">Alejandro Portaluppi</a>. En esta página dejaré el progreso de mi carrera.</p>
 
-      <p className="my-4">En esta página dejaré mi progreso en la carrera</p>
-
-      <div className="flex gap-3">
-        <p className="font-semibold">Promedio general: <span className="text-green-700">{promedio}</span></p>
-        <div>
-          <input type="checkbox" name="prom" id="prom" defaultChecked onChange={handleCheckbox} />
-          <label htmlFor="prom" className="pl-1">Incluir el CBC en los cálculos</label>
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
+        <p className="font-semibold mb-2 sm:mb-0">Promedio general:{" "}<span className="text-green-400">{promedio.toFixed(2)}</span></p>
+        <div className="flex items-center">
+          <label htmlFor="prom" className="flex items-center cursor-pointer">
+            <div className="relative">
+              <input type="checkbox" id="prom" className="sr-only" checked={checkbox} onChange={handleCheckbox} />
+              <div className={`block w-12 h-6 rounded-full transition-colors duration-300 ease-in-out ${checkbox ? 'bg-blue-600' : 'bg-gray-600'}`}>
+              </div>
+              <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 ease-in-out ${checkbox && 'transform translate-x-6'}`}>
+              </div>
+            </div>
+            <span className="ml-3 text-sm">Incluir el CBC en los cálculos</span>
+          </label>
         </div>
       </div>
 
-      <div className="my-4 flex justify-center items-center">
-        <div className="relative flex w-2/3 flex-col border border-black rounded-sm">
-          <p className="absolute h-7 w-full bg-gray-300 text-center"></p>
-          <p ref={pProgressRef} className={`transition-all px-1 z-10 h-7 w-2/3 bg-blue-400 text-center border-r border-dashed border-black text-nowrap`}>{progreso.toFixed(2)}% completado</p>
+      <div className="mb-6">
+        <div className="w-full bg-gray-700 rounded-full h-2.5">
+          <div ref={pProgressRef} className="bg-blue-500 h-2.5 rounded-full transition-all duration-500 ease-out">
+          </div>
         </div>
-      </div>
-
-      <div className="my-4 w-96 text-center flex gap-4">
-        <p className="px-1 bg-green-400">Materias aprobadas</p>
-        <p className="px-1 bg-yellow-400">Materias actuales</p>
+        <p className="text-center mt-2">{progreso.toFixed(2)}% completado</p>
       </div>
 
       <Grid />
-
-      <a className='fixed bottom-[1vw] right-[1vw] hover:font-semibold text-sm max-md:text-xs hover:scale-105 hover:translate-x-[-0.25vw] transition-all duration-100' href="https://www.linkedin.com/in/alejandro-portaluppi/" target="_blank" rel="noopener noreferrer">Desarrollado por Alejandro P</a>
-    </section>
-  )
+    </div>
+  );
 }
