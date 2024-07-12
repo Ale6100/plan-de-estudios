@@ -15,7 +15,6 @@
   transform-style: preserve-3d;
 }
 
-.flip-card:hover .flip-card-inner,
 .flip-card-inner.flipped {
   transform: rotateY(180deg);
 }
@@ -31,4 +30,16 @@
 
 .flip-card-back {
   transform: rotateY(180deg);
+}
+
+@media screen and (min-width: 768px){
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+@media screen and (max-width: 768px){
+  .flip-card:active .flip-card-inner {
+    transform: rotateY(180deg);
+  }
 }
