@@ -31,15 +31,3 @@
 .flip-card-back {
   transform: rotateY(180deg);
 }
-
-@media screen and (min-width: 768px){
-  .flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-}
-
-@media screen and (max-width: 768px){
-  .flip-card:active .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-}

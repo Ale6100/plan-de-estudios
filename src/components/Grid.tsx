@@ -21,6 +21,18 @@ export default function Grid({ checkbox }: { readonly checkbox: boolean }) {
     return colors;
   };
 
+  const rotar = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.currentTarget;
+    const rotacionActual = target.style.transform;
+    const flipCardInner = document.querySelectorAll('.flip-card .flip-card-inner');
+    flipCardInner.forEach(cardMateria => {
+        if (cardMateria instanceof HTMLDivElement) {
+          cardMateria.style.transform = 'rotateY(0deg)';
+        }
+      }
+    )
+    target.style.transform = rotacionActual === 'rotateY(180deg)' ? 'rotateY(0deg)' : 'rotateY(180deg)';
+  }
 
   return (
     <div ref={animationParent} className="text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -32,8 +44,8 @@ export default function Grid({ checkbox }: { readonly checkbox: boolean }) {
               {puntosDeCorte.find(e => e.id === materia.id)?.texto}
             </div>
           )}
-          <div className='flip-card h-40'> {/* El código para el flip-card lo saqué parcialmente de internet */}
-            <div className='flip-card-inner'>
+          <div className='flip-card h-40 cursor-pointer'>
+            <div className='flip-card-inner md:hover:shadow-sm md:hover:shadow-blue-800 rounded-lg' onClick={rotar}>
               <div className={`flip-card-front flex flex-col justify-center items-center py-4 px-3 gap-3 rounded-lg ${bgColors(materia)}`}>
                 <p className="font-semibold text-lg">{materia.nombre}</p>
                 {materia.nota && <p className="text-sm">Nota Final: {materia.nota}</p>}
