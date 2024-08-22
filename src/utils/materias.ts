@@ -86,10 +86,9 @@ export const materias: IMateria[] = [
   },
   {
     id: 4,
-    nombre: 'Algortimos y Estructuras de Datos',
+    nombre: 'Algoritmos y Estructuras de Datos',
     horasSemanales: 15,
     conectadoCon: [],
-    cursando: true
   },
   {
     id: 5,
@@ -166,7 +165,7 @@ export const materias: IMateria[] = [
   },
   {
     id: 17,
-    nombre: 'Materias optativas (4 créditos)',
+    nombre: 'Materias optativas (80 horas)',
     horasSemanales: 5,
     conectadoCon: [],
   },
@@ -184,18 +183,24 @@ export const materias: IMateria[] = [
   },
   {
     id: 20,
-    nombre: 'Materias optativas (4 créditos)',
+    nombre: 'Materias optativas (80 horas)',
     horasSemanales: 5,
     conectadoCon: []
   },
   {
     id: 21,
-    nombre: 'Materias optativas (8 créditos)',
+    nombre: 'Materias optativas (160 horas)',
     horasSemanales: 10,
     conectadoCon: []
   },
   {
     id: 22,
+    nombre: 'Seminario sobre Tecnología y Sociedad',
+    horasSemanales: 3,
+    conectadoCon: []
+  },
+  {
+    id: 23,
     nombre: 'Trabajo Final - Tesis de Licenciatura',
     horasSemanales: 15,
     conectadoCon: [],
