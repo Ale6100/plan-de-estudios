@@ -9,6 +9,7 @@ Aquí encontrarás:
 - La carga horaria semanal de cada materia
 - El programa y contenido adicional de cada materia que voy cursando
 - Mis notas finales y promedio general
+- Materias habilitadas para inscribirme
 - Una opción que te permite desestimar el CBC del plan de estudios
 
 ## Autor ✒️
