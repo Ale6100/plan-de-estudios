@@ -2,14 +2,14 @@ import { Fragment, useEffect, useState } from "react";
 import { IMateria, materias, puntosDeCorte } from "../utils/materias";
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 
-export default function Grid({ checkbox }: { readonly checkbox: boolean }) {
+export default function Grid({ incluirCBC }: { readonly incluirCBC: boolean }) {
   const [ materiasLista, setMateriasLista ] = useState<IMateria[]>([]);
   const [ animationParent ] = useAutoAnimate()
 
   useEffect(() => {
-    const listaMaterias = checkbox ? materias : materias.filter(materia => materia.id >= 2);
+    const listaMaterias = incluirCBC ? materias : materias.filter(materia => materia.id >= 2);
     setMateriasLista(listaMaterias)
-  }, [checkbox]);
+  }, [incluirCBC]);
 
   const bgColors = (materia: IMateria) => {
     let colors = "bg-gray-700 text-gray-300";
@@ -34,6 +34,16 @@ export default function Grid({ checkbox }: { readonly checkbox: boolean }) {
     target.style.transform = rotacionActual === 'rotateY(180deg)' ? 'rotateY(0deg)' : 'rotateY(180deg)';
   }
 
+  const habilitadaParaCursarLuego = (materia: IMateria) => {
+    if (materia.cursando) return false;
+    if (materia.id >= 21) return false;
+    if (materia.correlativaCon.length == 0) {
+      return materia.nota == undefined;
+    }
+    const correlativasPendientes = materias.filter(m => materia.correlativaCon.includes(m.id) && m.nota == undefined);
+    return correlativasPendientes.length === 0 && materia.nota == undefined;
+  }
+
   return (
     <div ref={animationParent} className="text-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {
@@ -44,8 +54,8 @@ export default function Grid({ checkbox }: { readonly checkbox: boolean }) {
               {puntosDeCorte.find(e => e.id === materia.id)?.texto}
             </div>
           )}
-          <div className='flip-card h-40 cursor-pointer'>
-            <div className='flip-card-inner md:hover:shadow-sm md:hover:shadow-blue-800 rounded-lg' onClick={rotar}>
+          <div className="flip-card h-40 cursor-pointer">
+            <div className={`flip-card-inner md:hover:shadow-sm md:hover:shadow-blue-800 rounded-lg ${habilitadaParaCursarLuego(materia) ? 'border border-green-300' : ''}`} onClick={rotar}>
               <div className={`flip-card-front flex flex-col justify-center items-center py-4 px-3 gap-3 rounded-lg ${bgColors(materia)}`}>
                 <p className="font-semibold text-lg">{materia.nombre}</p>
                 {materia.nota && <p className="text-sm">Nota Final: {materia.nota}</p>}

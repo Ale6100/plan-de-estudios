@@ -4,7 +4,7 @@ import DatosBase from "./components/DatosBase";
 import { useState } from "react";
 
 export default function App() {
-  const [checkbox, setCheckbox] = useState(true);
+  const [ incluirCBC, setIncluirCBC ] = useState(true);
 
   return (
     <main className="bg-gray-900 text-gray-200">
@@ -13,11 +13,11 @@ export default function App() {
 
         <p>Mi nombre es{" "}<a className="text-blue-400 hover:underline" href="https://www.linkedin.com/in/alejandro-portaluppi/" target="_blank" rel="noopener noreferrer">Alejandro Portaluppi</a>. En esta página dejaré el progreso de mi carrera.</p>
 
-        <DatosBase checkbox={checkbox} setCheckbox={setCheckbox}/>
+        <DatosBase incluirCBC={incluirCBC} setIncluirCBC={setIncluirCBC}/>
 
         <Referencias />
 
-        <Grid checkbox={checkbox} />
+        <Grid incluirCBC={incluirCBC} />
       </div>
     </main>
   );

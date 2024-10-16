@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { materias } from "../utils/materias";
 
-export default function DatosBase({ checkbox, setCheckbox }: { readonly checkbox: boolean, readonly setCheckbox: Dispatch<SetStateAction<boolean>>}) {
+export default function DatosBase({ incluirCBC, setIncluirCBC }: { readonly incluirCBC: boolean, readonly setIncluirCBC: Dispatch<SetStateAction<boolean>>}) {
   const [promedio, setPromedio] = useState(0);
   const [progreso, setProgreso] = useState(0);
   const pProgressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const listaMaterias = checkbox ? materias : materias.filter(materia => materia.id >= 2);
+    const listaMaterias = incluirCBC ? materias : materias.filter(materia => materia.id >= 2);
     const listaMateriasAprobadas = listaMaterias.filter(materia => materia.nota != null);
 
     const promedio = listaMateriasAprobadas.reduce((acc, materia) => acc + (materia.nota ?? 0), 0) / listaMateriasAprobadas.length;
@@ -19,11 +19,7 @@ export default function DatosBase({ checkbox, setCheckbox }: { readonly checkbox
       pProgres.style.width = `${progreso}%`;
       setProgreso(progreso);
     }
-  }, [checkbox]);
-
-  const handleCheckbox = () => {
-    setCheckbox(!checkbox);
-  };
+  }, [incluirCBC]);
 
   return (
     <>
@@ -32,10 +28,10 @@ export default function DatosBase({ checkbox, setCheckbox }: { readonly checkbox
       <div className="flex items-center">
         <label htmlFor="prom" className="flex items-center cursor-pointer">
           <div className="relative">
-            <input type="checkbox" id="prom" className="sr-only" checked={checkbox} onChange={handleCheckbox} />
-            <div className={`block w-12 h-6 rounded-full transition-colors duration-300 ease-in-out ${checkbox ? 'bg-blue-600' : 'bg-gray-600'}`}>
+            <input type="checkbox" id="prom" className="sr-only" checked={incluirCBC} onChange={() => setIncluirCBC(!incluirCBC)} />
+            <div className={`block w-12 h-6 rounded-full transition-colors duration-300 ease-in-out ${incluirCBC ? 'bg-blue-600' : 'bg-gray-600'}`}>
             </div>
-            <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 ease-in-out ${checkbox && 'transform translate-x-6'}`}>
+            <div className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 ease-in-out ${incluirCBC && 'transform translate-x-6'}`}>
             </div>
           </div>
           <span className="ml-3 text-sm">Incluir el CBC en los cálculos</span>
