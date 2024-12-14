@@ -2,7 +2,7 @@ export interface IMateria {
   id: number;
   nombre: string;
   horasSemanales: number;
-  correlativaCon: number[]; //! id de las materias correlativas
+  correlativaCon: number[];
   nota?: number;
   cursando?: boolean;
   enlaces?: {
@@ -63,8 +63,12 @@ export const materias: IMateria[] = [
     enlaces: [
       {
         text: 'Programa',
-        url: 'programas/algebra_1.txt'
+        url: 'programas/algebra_1.html'
       },
+      {
+        text: 'Bibliografía principal',
+        url: 'bibliografía/Álgebra1.pdf'
+      }
     ]
   },
   {
@@ -79,6 +83,10 @@ export const materias: IMateria[] = [
         url: 'programas/introduccion_a_la_programacion.pdf'
       },
       {
+        text: 'Bibliografía resumida',
+        url: 'bibliografía/Introducción_a_la_programación.pdf'
+      },
+      {
         text: 'Material',
         url: 'https://github.com/Ale6100/introduccion-a-la-programacion.git'
       }
@@ -89,11 +97,15 @@ export const materias: IMateria[] = [
     nombre: 'Análisis I',
     horasSemanales: 10,
     correlativaCon: [-4, -3, -2, -1, 0, 1],
-    cursando: true,
+    nota: 10,
     enlaces: [
       {
         text: 'Programa',
         url: 'programas/analisis_1.pdf'
+      },
+      {
+        text: 'Bibliografía principal',
+        url: 'bibliografía/Análisis_1.pdf'
       }
     ]
   },
