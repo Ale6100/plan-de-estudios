@@ -59,7 +59,7 @@ export const materias: IMateria[] = [
     nombre: 'Álgebra I',
     horasSemanales: 10,
     correlativaCon: [-4, -3, -2, -1, 0, 1],
-    nota: 8,
+    nota: 7,
     enlaces: [
       {
         text: 'Programa',
@@ -125,7 +125,14 @@ export const materias: IMateria[] = [
     id: 7,
     nombre: 'Sistemas Digitales',
     horasSemanales: 5,
-    correlativaCon: [3]
+    correlativaCon: [3],
+    nota: 8,
+    enlaces: [
+      {
+        text: 'Bibliografía resumida',
+        url: 'bibliografía/Sistemas_digitales.pdf'
+      }
+    ]
   },
   {
     id: 8,
